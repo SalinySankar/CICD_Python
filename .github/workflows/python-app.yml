@@ -39,3 +39,19 @@ jobs:
     - name: Test with pytest
       run: |
         pytest 
+    # ...existing code...
+  deploy:
+      needs: build
+      runs-on: windows-latest
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+
+      steps:
+        - name: checkout code for deployment
+          uses: actions/checkout@v4
+        - name: Deploy to Production Server 
+
+        run: |
+          echo "Starting deployment to Production Server"
+          #ssh prod@prodserver 'cd /path/to/app && git pull && systemctl restart app.service'
+          echo "Deployment to Production Server completed"
+  # ...existing code...
